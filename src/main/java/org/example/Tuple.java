@@ -2,13 +2,6 @@ package org.example;
 
 public class Tuple {
 
-    // Define a custom exception class
-    public static class TupleException extends Exception {
-        public TupleException(String message) {
-            super(message);
-        }
-    }
-
     public Tuple(float v, float v1, float v2, float v3) {
         x = v;
         y = v1;
@@ -33,11 +26,7 @@ public class Tuple {
         return new Tuple(v,v1,v2,0.0f);
     }
 
-    public Tuple add(Tuple b) throws TupleException {
-        if (this.w + b.w > 1) {
-            throw new TupleException("You can't add two points with each other");
-        }
-
+    public Tuple add(Tuple b) {
         float x = this.x + b.x;
         float y = this.y + b.y;
         float z = this.z + b.z;
@@ -45,19 +34,38 @@ public class Tuple {
         return new Tuple(x,y,z,w);
     }
 
-    public Tuple subtract(Tuple b) throws TupleException {
-        if (this.w - b.w < 0 ) {
-            throw new TupleException("You can't subtract two points with each other");
-        }
-
-        float x = this.x - b.x;
-        float y = this.y - b.y;
-        float z = this.z - b.z;
-        float w = this.w - b.w;
-        return new Tuple(x,y,z,w);
+    public Tuple subtract(Tuple b) {
+        return this.add(b.negate());
     }
     public Tuple negate() {
         return new Tuple(-(this.x),-(this.y),-(this.z),-(this.w));
+    }
+    public Tuple multiply(float scalar) {
+        float scaledX = (this.x) * scalar;
+        float scaledY = (this.y) * scalar;
+        float scaledZ = (this.z) * scalar;
+        float scaledW = (this.w) * scalar;
+        return new Tuple(scaledX,scaledY,scaledZ,scaledW);
+    }
+    public Tuple divide(float scalar) {
+        return this.multiply(1/scalar);
+    }
+
+    public float getMagnitude() {
+        return (float)(Math.sqrt((this.x) * (this.x) +(this.y) * (this.y) + (this.z) * (this.z)));
+    }
+
+    public Tuple normalize() {
+        float magnitude = this.getMagnitude();
+        return new Tuple (this.x / magnitude, this.y / magnitude, this.z / magnitude, this.w / magnitude);
+    }
+
+    public float dotProduct(Tuple b) {
+        return (this.x) * (b.x) +(this.y) * (b.y) + (this.z) * (b.z) + (this.w) * (b.w);
+    }
+
+    public Tuple crossProduct(Tuple b) {
+        return Tuple.vector(this.y * b.z - this.z * b.y, this.z * b.x - this.x * b.z, this.x * b.y - this.y * b.x);
     }
 
     public float getX() {
