@@ -132,4 +132,29 @@ public class TupleTest {
         Assertions.assertEquals(new Vector(-1,2,-1), a.crossProduct(b));
         Assertions.assertEquals(new Vector(1,-2,1), b.crossProduct(a));
     }
+    @Test
+    void addColors() {
+        Color a = new Color(0.9f,0.6f,0.75f);
+        Color b = new Color(0.7f,0.1f,0.25f);
+        Assertions.assertEquals(new Color(1.6f,0.7f,1.0f), a.add(b));
+    }
+    @Test
+    void subtractColors() {
+        Color a = new Color(0.9f,0.6f,0.75f);
+        Color b = new Color(0.7f,0.1f,0.25f);
+        Assertions.assertEquals(new Color(0.2f,0.5f,0.5f), a.subtract(b));
+    }
+    @Test
+    void multiplyColorByScalar() {
+        Color a = new Color(0.2f,0.3f,0.4f);
+        Assertions.assertEquals(new Color(0.4f,0.6f,0.8f), a.multiply(2));
+    }
+
+    @Test
+    void multiplyTwoColors() {
+        Color a = new Color(1.0f,0.2f,0.4f);
+        Color b = new Color(0.9f,1.0f,0.1f);
+        Assertions.assertEquals(new Color(0.9f,0.2f,0.04f), a.hadamardProduct(b));
+    }
+
 }
