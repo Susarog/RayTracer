@@ -41,7 +41,6 @@ public class Point {
 
     public Point subtract(Point b) {
         return new Point(this.coordinate.subtract(b.coordinate));
-
     }
     public Point multiply(float scalar) {
         return new Point(this.coordinate.multiply(scalar));
