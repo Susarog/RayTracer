@@ -1,17 +1,17 @@
 package org.example;
 
 public class Environment {
-    public Environment(Tuple gravity, Tuple wind) {
+    public Environment(Vector gravity, Vector wind) {
         this.gravity = gravity;
         this.wind = wind;
     }
-    public Tuple getGravity() {
+    public Vector getGravity() {
         return gravity;
     }
 
-    public Tuple getWind() {
+    public Vector getWind() {
         return wind;
     }
-    private Tuple gravity;
-    private Tuple wind;
+    private Vector gravity;
+    private Vector wind;
 }
