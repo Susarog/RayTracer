@@ -8,21 +8,21 @@ public class Canvas {
         this.height = height;
         canvas = new ArrayList<>();
 
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < height; i++) {
             ArrayList<Color> innerList = new ArrayList<>();
-            for (int j = 0; j < height; j++) {
-                innerList.add(new Color(0.0f,0.0f,0.0f)); // You can add any values you want here
+            for (int j = 0; j < width; j++) {
+                innerList.add(new Color(0.0f,0.0f,0.0f));
             }
             canvas.add(innerList);
         }
     }
 
     public void writePixel(int row, int column, Color color) {
-        canvas.get(row).set(column,color);
+        canvas.get(column).set(row,color);
     }
 
     public Color getPixel(int row, int column) {
-        return canvas.get(row).get(column);
+        return canvas.get(column).get(row);
     }
 
     public int getWidth() {

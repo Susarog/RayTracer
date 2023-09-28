@@ -11,9 +11,9 @@ class CanvasTest {
         int width = 10;
         int height = 20;
         ArrayList<ArrayList<Color>> canvasArray = new ArrayList<>();
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < height; i++) {
             ArrayList<Color> innerList = new ArrayList<>();
-            for (int j = 0; j < height; j++) {
+            for (int j = 0; j < width; j++) {
                 innerList.add(new Color(0.0f,0.0f,0.0f)); // You can add any values you want here
             }
             canvasArray.add(innerList);
@@ -40,7 +40,7 @@ class CanvasTest {
                 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                 """;
 
-        Assertions.assertEquals("P3\n5 3\n255\n" + pixelData, ppm);
+        Assertions.assertEquals("P3\n5 3\n255\n" + pixelData + "\n", ppm);
     }
     @Test
     void constructingPPMPixelData() {
@@ -57,16 +57,16 @@ class CanvasTest {
                             0 0 0 0 0 0 0 128 0 0 0 0 0 0 0
                             0 0 0 0 0 0 0 0 0 0 0 0 0 0 255
                             """;
-        Assertions.assertEquals("P3\n5 3\n255\n" + pixelData, ppm);
+        Assertions.assertEquals("P3\n5 3\n255\n" + pixelData + "\n", ppm);
     }
     @Test
     void SplitLongLinesInPPMFile() {
         Canvas c = new Canvas(10, 2);
         Color c1 = new Color(1.0f,0.8f,0.6f);
         ArrayList<ArrayList<Color>> pixels = c.getCanvas();
-        for (int i = 0; i < pixels.size(); i++) {
-            for (int j = 0; j < pixels.get(i).size(); j++) {
-                c.writePixel(i,j,c1);
+        for (int column = 0; column < pixels.size(); column++) {
+            for (int row = 0; row < pixels.get(column).size(); row++) {
+                c.writePixel(row,column,c1);
             }
         }
         String ppm = PPMConverter.convertToPPM(c);
@@ -76,6 +76,25 @@ class CanvasTest {
                             255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
                             153 255 204 153 255 204 153 255 204 153 255 204 153
                             """;
-        Assertions.assertEquals("P3\n10 2\n255\n" + pixelData, ppm);
+        Assertions.assertEquals("P3\n10 2\n255\n" + pixelData + "\n", ppm);
+    }
+    @Test
+    void PPMFileTerminatedByNewLineChar() {
+        Canvas c = new Canvas(10, 2);
+        Color c1 = new Color(1.0f,0.8f,0.6f);
+        ArrayList<ArrayList<Color>> pixels = c.getCanvas();
+        for (int column = 0; column < pixels.size(); column++) {
+            for (int row = 0; row < pixels.get(column).size(); row++) {
+                c.writePixel(row,column,c1);
+            }
+        }
+        String ppm = PPMConverter.convertToPPM(c);
+        String pixelData = """
+                            255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+                            153 255 204 153 255 204 153 255 204 153 255 204 153
+                            255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+                            153 255 204 153 255 204 153 255 204 153 255 204 153
+                            """;
+        Assertions.assertEquals("P3\n10 2\n255\n" + pixelData + "\n", ppm);
     }
 }

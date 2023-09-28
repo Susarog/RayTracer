@@ -24,29 +24,36 @@ public class PPMConverter {
         StringBuilder PPM = new StringBuilder();
         PPM.append(magicNumber).append(dimensions).append(maxColorValue);
         final int CHARACTER_LIMIT = 70;
-        int charCounter = 0;
-        for (ArrayList<Color> row : pixels) {
+        for (int i = 0; i < pixels.size(); i++) {
+            int charCounter = 0;
+            ArrayList<Color> row = pixels.get(i);
             int numCols = row.size();
             for (int j = 0; j < numCols; j++) {
                 Color color = row.get(j);
-                int r = Math.round(updateColorBounds(color.getRed()) * 255);
-                int g = Math.round(updateColorBounds(color.getGreen()) * 255);
-                int b = Math.round(updateColorBounds(color.getBlue()) * 255);
-                String colorValue = r + " " + g + " " + b;
-                /*
-                charCounter += colorValue.length();
-                if(charCounter > CHARACTER_LIMIT) {
-                    charCounter = colorValue.length();
-                    PPM.append("\n");
-                }
-                 */
-                PPM.append(colorValue);
-                if (j < numCols - 1) {
-                    PPM.append(" ");
+                String r = String.valueOf(Math.round(updateColorBounds(color.getRed()) * 255));
+                String g = String.valueOf(Math.round(updateColorBounds(color.getGreen()) * 255));
+                String b = String.valueOf(Math.round(updateColorBounds(color.getBlue()) * 255));
+                String[] colorTuple = new String[]{r, g, b};
+
+                for (int k = 0; k < colorTuple.length; k++) {
+                    String colorValue = colorTuple[k];
+                    if (i == 0 && j == 0 && k == 0) {
+                        charCounter += colorValue.length();
+                    } else {
+                        charCounter += colorValue.length() + 1;
+                    }
+
+                    if (charCounter > CHARACTER_LIMIT) {
+                        charCounter = colorValue.length();
+                        PPM.append("\n");
+                    } else if(!(j == 0 && k == 0)){
+                        colorValue = " " + colorValue;
+                    }
+                    PPM.append(colorValue);
                 }
             }
             PPM.append("\n");
         }
-        return PPM.toString();
+        return PPM.append("\n").toString();
     }
 }
