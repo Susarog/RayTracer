@@ -2,11 +2,15 @@ package org.example;
 
 public class Point {
     public Point(float x, float y, float z) {
-        coordinate = new Tuple(x,y,z);
+        coordinate = new Tuple(x,y,z, 1f);
     }
 
     public Point(Tuple a) {
         coordinate = a;
+    }
+
+    public Point(float[] a) {
+        coordinate = new Tuple(a[0],a[1],a[2],a[3]);
     }
 
     @Override
@@ -30,6 +34,9 @@ public class Point {
 
     public float getZ() {
         return coordinate.getValue2();
+    }
+    public float getW() {
+        return coordinate.getValue3();
     }
 
     public Point add(Point b){

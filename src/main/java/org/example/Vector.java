@@ -3,11 +3,14 @@ package org.example;
 public class Vector {
 
     public Vector(float x, float y, float z) {
-        tuple = new Tuple(x,y,z);
+        tuple = new Tuple(x,y,z, 0f);
     }
 
     public Vector(Tuple a) {
         tuple = a;
+    }
+    public Vector(float[] a) {
+        tuple = new Tuple(a[0],a[1],a[2],a[3]);
     }
 
     @Override
@@ -32,6 +35,7 @@ public class Vector {
     public float getZ() {
         return tuple.getValue2();
     }
+    public float getW() { return tuple.getValue3(); }
 
     public Tuple getTuple() {
         return tuple;

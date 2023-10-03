@@ -2,7 +2,7 @@ package org.example;
 
 public class Color {
     public Color(float red, float green, float blue) {
-        colorModel = new Tuple(red,green,blue);
+        colorModel = new Tuple(red,green,blue, 0f);
     }
     public Color(Tuple a) {
         colorModel = a;

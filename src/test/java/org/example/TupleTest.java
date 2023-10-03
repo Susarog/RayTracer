@@ -7,7 +7,7 @@ public class TupleTest {
     private final static double EPSILON = 0.00001;
     @Test
     public void creatingTuple() {
-        Tuple pointTuple = new Tuple(4.3f, -4.2f, 3.1f);
+        Tuple pointTuple = new Tuple(4.3f, -4.2f, 3.1f, 0f);
         Assertions.assertEquals(pointTuple.getValue(), 4.3f);
         Assertions.assertEquals(pointTuple.getValue1(), -4.2f);
         Assertions.assertEquals(pointTuple.getValue2(), 3.1f);
@@ -53,25 +53,25 @@ public class TupleTest {
 
     @Test
     void negateTuple() {
-        Tuple a = new Tuple(1.0f,-2.0f,3.0f);
+        Tuple a = new Tuple(1.0f,-2.0f,3.0f,0f);
         Tuple negativeA = a.negate();
-        Assertions.assertEquals(new Tuple(-1.0f,2.0f,-3.0f), negativeA);
+        Assertions.assertEquals(new Tuple(-1.0f,2.0f,-3.0f,0f), negativeA);
     }
 
     @Test
     void multiplyTupleByScalar() {
-        Tuple a = new Tuple(1.0f,-2.0f,3.0f);
-        Assertions.assertEquals(new Tuple(3.5f,-7,10.5f), a.multiply(3.5f));
+        Tuple a = new Tuple(1.0f,-2.0f,3.0f, 0f);
+        Assertions.assertEquals(new Tuple(3.5f,-7,10.5f, 0f), a.multiply(3.5f));
     }
     @Test
     void multiplyTupleByFraction() {
-        Tuple a = new Tuple(1.0f,-2.0f,3.0f);
-        Assertions.assertEquals(new Tuple(0.5f,-1,1.5f), a.multiply(0.5f));
+        Tuple a = new Tuple(1.0f,-2.0f,3.0f, 0f);
+        Assertions.assertEquals(new Tuple(0.5f,-1,1.5f, 0f), a.multiply(0.5f));
     }
     @Test
     void divideTupleByScalar() {
-        Tuple a = new Tuple(1.0f,-2.0f,3.0f);
-        Assertions.assertEquals(new Tuple(0.5f,-1,1.5f), a.divide(2));
+        Tuple a = new Tuple(1.0f,-2.0f,3.0f, 0f);
+        Assertions.assertEquals(new Tuple(0.5f,-1,1.5f, 0f), a.divide(2));
     }
     @Test
     void computeMagnitudeOfXVector() {
