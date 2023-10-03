@@ -109,4 +109,29 @@ class MatrixTest {
         Matrix c4 = a4.multiply(b4);
         assertEquals(new Matrix(c), c4);
     }
+    @Test
+    void matrixMultiplyByPoint() {
+        float[] row1 = new float[]{1f,2f,3f,4f};
+        float[] row2 = new float[]{2f,4f,4f,2f};
+        float[] row3 = new float[]{8f,6f,4f,1f};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] a = new float[][]{row1,row2,row3,row4};
+        Matrix a4 = new Matrix(a);
+        Point b = new Point(1,2,3);
+
+        assertEquals(new Point(18f,24f,33f), a4.multiply(b));
+    }
+
+    @Test
+    void matrixMultiplyByVector() {
+        float[] row1 = new float[]{1f,2f,3f,4f};
+        float[] row2 = new float[]{2f,4f,4f,2f};
+        float[] row3 = new float[]{8f,6f,4f,1f};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] a = new float[][]{row1,row2,row3,row4};
+        Matrix a4 = new Matrix(a);
+        Vector b = new Vector(1,2,3);
+
+        assertEquals(new Vector(14f,22f,32f), a4.multiply(b));
+    }
 }

@@ -38,13 +38,6 @@ public class Matrix {
         return matrix[row][col];
     }
 
-    /*
-     * this's row and other's col
-     * have to ensure they have the same length for respective column and row
-     *
-     *
-     */
-
     public Matrix multiply(Matrix other) {
         if(matrix[0].length != other.matrix.length) {
             //throw or smth
@@ -53,7 +46,6 @@ public class Matrix {
         float[][] newMatrix = new float[matrix.length][other.matrix[0].length];
         for(int k = 0; k < newMatrix.length; k++) {
             float[] temp = new float[other.matrix[0].length];
-            //TODO fix matrix multiplication shit
             for(int i = 0; i < temp.length; i++) {
                 for(int j = 0; j < matrix[0].length; j++) {
                     val += matrix[k][j] * other.matrix[j][i];
@@ -65,6 +57,44 @@ public class Matrix {
         }
         return new Matrix(newMatrix);
     }
+
+
+    public Point multiply(Point p) {
+        if(matrix[0].length != 4) {
+            //throw or smth
+        }
+        float val = 0;
+        float[] coords = new float[]{p.getX(), p.getY(), p.getZ(), p.getW()};
+        float[] newPoint = new float[coords.length];
+        for(int i = 0; i < matrix.length; i++) {
+            float[] temp = matrix[i];
+            for(int j = 0; j < coords.length; j++) {
+                val += temp[j] * coords[j];
+            }
+            newPoint[i] = val;
+            val = 0;
+        }
+        return new Point(newPoint);
+    }
+
+    public Vector multiply(Vector v) {
+        if(matrix[0].length != 4) {
+            //throw or smth
+        }
+        float val = 0;
+        float[] coords = new float[]{v.getX(), v.getY(), v.getZ(), v.getW()};
+        float[] newVector = new float[coords.length];
+        for(int i = 0; i < matrix.length; i++) {
+            float[] temp = matrix[i];
+            for(int j = 0; j < coords.length; j++) {
+                val += temp[j] * coords[j];
+            }
+            newVector[i] = val;
+            val = 0;
+        }
+        return new Vector(newVector);
+    }
+
 
     private float[][] matrix;
     private int row;
