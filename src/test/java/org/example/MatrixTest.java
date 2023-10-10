@@ -179,5 +179,36 @@ class MatrixTest {
         Matrix a2 = new Matrix(a);
         assertEquals(17, a2.getDeterminant());
     }
+    @Test
+    void matrix4ToMatrix3() {
+        float[] row1 = new float[]{-6f,1f,1f,6f};
+        float[] row2 = new float[]{-8f,5f,8f,6f};
+        float[] row3 = new float[]{-1f,0f,8f,2f};
+        float[] row4 = new float[]{-7f,1f,-1f,1f};
+        float[][] a = new float[][]{row1,row2,row3,row4};
+        Matrix a4 = new Matrix(a);
+
+        float[] row5 = new float[]{-6f,1f,6f};
+        float[] row6 = new float[]{-8f,8f,6f};
+        float[] row7 = new float[]{-7f,-1f,1f};
+        float[][] b = new float[][]{row5,row6,row7};
+        Matrix expectedMatrix = new Matrix(b);
+
+        assertEquals(expectedMatrix, a4.subMatrix(2,1));
+    }
+    @Test
+    void matrix3ToMatrix2() {
+        float[] row1 = new float[]{1f,5f,0f};
+        float[] row2 = new float[]{-3f,2f,7f};
+        float[] row3 = new float[]{0f,6f,-3f};
+        float[][] a = new float[][]{row1,row2,row3};
+        Matrix a3 = new Matrix(a);
+
+        float[] row4 = new float[]{-3f,2f};
+        float[] row5 = new float[]{0f,6f};
+        float[][] b = new float[][]{row4,row5};
+        Matrix expectedMatrix = new Matrix(b);
+        assertEquals(expectedMatrix, a3.subMatrix(0,2));
+    }
 
 }

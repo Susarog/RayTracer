@@ -114,6 +114,25 @@ public class Matrix {
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
     }
 
+    public Matrix subMatrix(int row, int column) {
+        float[][] newMatrix = new float[matrix.length - 1][matrix[0].length - 1];
+        int rowIdx = 0;
+        int colIdx = 0;
+
+        for (int i = 0; i < matrix.length; i++) {
+            if (row != i) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if (column != j) {
+                        newMatrix[rowIdx][colIdx++] = matrix[i][j];
+                    }
+                }
+                colIdx = 0;
+                rowIdx++;
+            }
+        }
+        return new Matrix(newMatrix);
+    }
+
     private float[][] matrix;
     private int row;
     private int column;
