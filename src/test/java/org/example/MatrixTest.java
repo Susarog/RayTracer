@@ -134,4 +134,50 @@ class MatrixTest {
 
         assertEquals(new Vector(14f,22f,32f), a4.multiply(b));
     }
+    @Test
+    void matrixMultiplyByIdentityMatrix() {
+        float[] row1 = new float[]{1f,2f,3f,4f};
+        float[] row2 = new float[]{2f,4f,4f,2f};
+        float[] row3 = new float[]{8f,6f,4f,1f};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] a = new float[][]{row1,row2,row3,row4};
+        Matrix a4 = new Matrix(a);
+
+        float[] row5 = new float[]{1f,0f,0f,0f};
+        float[] row6 = new float[]{0f,1f,0f,0f};
+        float[] row7 = new float[]{0f,0f,1f,0f};
+        float[] row8 = new float[]{0f,0f,0f,1f};
+        float[][] b = new float[][]{row5,row6,row7,row8};
+        Matrix identityMatrix = new Matrix(b);
+
+        assertEquals(a4, a4.multiply(identityMatrix));
+    }
+    @Test
+    void transposingMatrix() {
+        float[] row1 = new float[]{0f,9f,3f,0f};
+        float[] row2 = new float[]{9f,8f,0f,8f};
+        float[] row3 = new float[]{1f,8f,5f,3f};
+        float[] row4 = new float[]{0f,0f,5f,8f};
+        float[][] a = new float[][]{row1,row2,row3,row4};
+        Matrix a4 = new Matrix(a);
+
+        float[] row5 = new float[]{0f,9f,1f,0f};
+        float[] row6 = new float[]{9f,8f,8f,0f};
+        float[] row7 = new float[]{3f,0f,5f,5f};
+        float[] row8 = new float[]{0f,8f,3f,8f};
+        float[][] b = new float[][]{row5,row6,row7,row8};
+        Matrix transposedMatrix = new Matrix(b);
+
+        assertEquals(transposedMatrix, a4.transpose());
+    }
+
+    @Test
+    void getDeterminant() {
+        float[] row1 = new float[]{1f,5f};
+        float[] row2 = new float[]{-3f,2f};
+        float[][] a = new float[][]{row1,row2};
+        Matrix a2 = new Matrix(a);
+        assertEquals(17, a2.getDeterminant());
+    }
+
 }

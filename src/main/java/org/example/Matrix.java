@@ -95,6 +95,24 @@ public class Matrix {
         return new Vector(newVector);
     }
 
+    public Matrix transpose() {
+        float[][] transposedMatrix = new float[matrix.length][matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            transposedMatrix[i] = Arrays.copyOf(matrix[i], matrix[i].length);
+        }
+        for(int i = 0; i < transposedMatrix.length; i++) {
+            for(int j = i; j < transposedMatrix[0].length; j++) {
+                float tmp = transposedMatrix[i][j];
+                transposedMatrix[i][j] = transposedMatrix[j][i];
+                transposedMatrix[j][i] = tmp;
+            }
+        }
+        return new Matrix(transposedMatrix);
+    }
+
+    public float getDeterminant() {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    }
 
     private float[][] matrix;
     private int row;
