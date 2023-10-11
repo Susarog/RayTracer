@@ -20,8 +20,10 @@ public class Matrix {
         }
 
         for (int i = 0; i < row; i++) {
-            if (!Arrays.equals(matrix[i], otherMatrix.matrix[i])) {
-                return false;
+            for (int j = 0; j < column; j++) {
+                if (Math.abs(this.matrix[i][j] - otherMatrix.matrix[i][j]) > EPSILON) {
+                    return false;
+                }
             }
         }
 
@@ -111,7 +113,14 @@ public class Matrix {
     }
 
     public float getDeterminant() {
-        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        if (matrix.length ==2 && matrix[0].length == 2) {
+            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        }
+        float determinant = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            determinant += matrix[0][i]* cofactor(0,i);
+        }
+        return determinant;
     }
 
     public Matrix subMatrix(int row, int column) {
@@ -133,7 +142,39 @@ public class Matrix {
         return new Matrix(newMatrix);
     }
 
+    public float minor(int row, int column) {
+        Matrix newMatrix = subMatrix(row,column);
+        return newMatrix.getDeterminant();
+    }
+
+    public float cofactor(int row, int column) {
+        float minorVal = minor(row,column);
+        return (row + column) % 2 == 1 ? -(minorVal) : minorVal;
+    }
+
+    public boolean isInvertible() {
+        return getDeterminant() != 0;
+    }
+
+    public Matrix inverse() {
+        if(!(isInvertible())) {
+            //throw
+        }
+        float[][] newMatrix = new float[matrix.length][matrix[0].length];
+        float determinant = getDeterminant();
+        for(int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                float cofactor = this.cofactor(i,j);
+                // transposing by switching rows and columns
+                newMatrix[j][i] = (float) cofactor / determinant;
+            }
+        }
+        return new Matrix(newMatrix);
+    }
+
     private float[][] matrix;
     private int row;
     private int column;
+    private final static double EPSILON = 0.00001;
+
 }
