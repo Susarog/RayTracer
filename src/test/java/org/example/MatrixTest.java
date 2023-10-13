@@ -380,4 +380,44 @@ class MatrixTest {
         Vector v = new Vector(-3f,4f,5f);
         assertEquals(new Vector(-3f,4f,5f),transform.multiply(v));
     }
+    @Test
+    void multiplyScaledMatrixByPoint() {
+        Matrix transform = Matrix.scaling(2f,3f,4f);
+        Point v = new Point(-4f,6f,8f);
+        assertEquals(new Point(-8f,18f,32f),transform.multiply(v));
+    }
+    @Test
+    void multiplyScaledMatrixByVec() {
+        Matrix transform = Matrix.scaling(2f,3f,4f);
+        Vector v = new Vector(-4f,6f,8f);
+        assertEquals(new Vector(-8f,18f,32f),transform.multiply(v));
+    }
+
+    @Test
+    void multiplyInverseScaledMatrixByVec() {
+        Matrix transform = Matrix.scaling(2f,3f,4f);
+        Matrix inv = transform.inverse();
+        Vector v = new Vector(-4f,6f,8f);
+        assertEquals(new Vector(-2f,2f,2f),inv.multiply(v));
+    }
+    @Test
+    void multiplyReflectedScaledMatrix() {
+        Matrix transform = Matrix.scaling(-1f,1f,1f);
+        Point v = new Point(2f,3f,4f);
+        assertEquals(new Point(-2f,3f,4f),transform.multiply(v));
+    }
+    @Test
+    void multiplyXRotatedMatrix() {
+        Matrix halfQuarter = Matrix.xRotation((float) Math.toRadians(45));
+        Matrix fullQuarter = Matrix.xRotation((float) Math.toRadians(90));
+        Point p = new Point(0f,1f,0f);
+        assertEquals(new Point(0f, (float) (Math.sqrt(2)/2), (float) (Math.sqrt(2)/2)),halfQuarter.multiply(p));
+        assertEquals(new Point(0f, 0f, 1f),fullQuarter.multiply(p));
+    }
+    @Test
+    void multiplyInverseXRotatedMatrix() {
+        Matrix inversedHalfQuarter = Matrix.xRotation((float) Math.toRadians(45)).inverse();
+        Point p = new Point(0f,1f,0f);
+        assertEquals(new Point(0f, (float) (Math.sqrt(2)/2), (float) -(Math.sqrt(2)/2)),inversedHalfQuarter.multiply(p));
+    }
 }

@@ -188,7 +188,28 @@ public class Matrix {
         float[] row3 = new float[]{0f,0f,1f,z};
         float[] row4 = new float[]{0f,0f,0f,1f};
         float[][] transform = new float[][]{row1,row2,row3,row4};
-         return new Matrix(transform);
+        return new Matrix(transform);
+    }
+
+    public static Matrix scaling(float x, float y, float z) {
+        float[] row1 = new float[]{x,0f,0f,0f};
+        float[] row2 = new float[]{0f,y,0f,0f};
+        float[] row3 = new float[]{0f,0f,z,0f};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] transform = new float[][]{row1,row2,row3,row4};
+        return new Matrix(transform);
+    }
+
+    public static Matrix xRotation(float rad) {
+        float x = (float) Math.cos(rad);
+        float y = (float) Math.sin(rad);
+
+        float[] row1 = new float[]{1,0f,0f,0f};
+        float[] row2 = new float[]{0f,x,-y,0f};
+        float[] row3 = new float[]{0f,y,x,0f};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] transform = new float[][]{row1,row2,row3,row4};
+        return new Matrix(transform);
     }
 
     public int getRowLength() {
