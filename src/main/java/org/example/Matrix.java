@@ -181,6 +181,16 @@ public class Matrix {
         }
         return new Matrix(newMatrix);
     }
+
+    public static Matrix translation(float x, float y, float z) {
+        float[] row1 = new float[]{1f,0f,0f,x};
+        float[] row2 = new float[]{0f,1f,0f,y};
+        float[] row3 = new float[]{0f,0f,1f,z};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] transform = new float[][]{row1,row2,row3,row4};
+         return new Matrix(transform);
+    }
+
     public int getRowLength() {
         return row;
     }

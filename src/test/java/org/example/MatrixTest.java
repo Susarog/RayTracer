@@ -361,4 +361,23 @@ class MatrixTest {
         assertEquals(a4, c4.multiply(b4.inverse()));
     }
 
+    @Test
+    void multiplyInverseTranslationMatrix() {
+        Matrix transform = Matrix.translation(5f,-3f,2f);
+        Matrix inv = transform.inverse();
+        Point p = new Point(-3f,4f,5f);
+        assertEquals(new Point(-8f,7f,3f),inv.multiply(p));
+    }
+    @Test
+    void multiplyTranslationMatrix() {
+        Matrix transform = Matrix.translation(5f,-3f,2f);
+        Point p = new Point(-3f,4f,5f);
+        assertEquals(new Point(2f,1f,7f),transform.multiply(p));
+    }
+    @Test
+    void multiplyTranslationMatrixDoesntAffectVector() {
+        Matrix transform = Matrix.translation(5f,-3f,2f);
+        Vector v = new Vector(-3f,4f,5f);
+        assertEquals(new Vector(-3f,4f,5f),transform.multiply(v));
+    }
 }
