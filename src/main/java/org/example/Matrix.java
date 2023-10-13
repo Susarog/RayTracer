@@ -40,9 +40,16 @@ public class Matrix {
         return matrix[row][col];
     }
 
+    public static boolean canMultiply(Matrix matrixA, Matrix matrixB) {
+        int numColsA = matrixA.getColumnLength();
+        int numRowsB = matrixB.getRowLength();
+
+        return numColsA == numRowsB;
+    }
     public Matrix multiply(Matrix other) {
-        if(matrix[0].length != other.matrix.length) {
-            //throw or smth
+        if (!canMultiply(this,other)) {
+            System.err.println("Matrix multiplication is not possible because the number of columns in the first matrix does not match the number of rows in the second matrix");
+            System.exit(1);
         }
         float val = 0;
         float[][] newMatrix = new float[matrix.length][other.matrix[0].length];
@@ -63,7 +70,8 @@ public class Matrix {
 
     public Point multiply(Point p) {
         if(matrix[0].length != 4) {
-            //throw or smth
+            System.err.println("Matrix's column does not equal to point's length");
+            System.exit(1);
         }
         float val = 0;
         float[] coords = new float[]{p.getX(), p.getY(), p.getZ(), p.getW()};
@@ -81,7 +89,8 @@ public class Matrix {
 
     public Vector multiply(Vector v) {
         if(matrix[0].length != 4) {
-            //throw or smth
+            System.err.println("Matrix's column does not equal to vector's length");
+            System.exit(1);
         }
         float val = 0;
         float[] coords = new float[]{v.getX(), v.getY(), v.getZ(), v.getW()};
@@ -158,7 +167,8 @@ public class Matrix {
 
     public Matrix inverse() {
         if(!(isInvertible())) {
-            //throw
+            System.err.println("Cannot invert matrix. Matrix had a determinant of 0.");
+            System.exit(1);
         }
         float[][] newMatrix = new float[matrix.length][matrix[0].length];
         float determinant = getDeterminant();
@@ -166,12 +176,18 @@ public class Matrix {
             for (int j = 0; j < matrix[0].length; j++) {
                 float cofactor = this.cofactor(i,j);
                 // transposing by switching rows and columns
-                newMatrix[j][i] = (float) cofactor / determinant;
+                newMatrix[j][i] = cofactor / determinant;
             }
         }
         return new Matrix(newMatrix);
     }
+    public int getRowLength() {
+        return row;
+    }
 
+    public int getColumnLength() {
+        return column;
+    }
     private float[][] matrix;
     private int row;
     private int column;
