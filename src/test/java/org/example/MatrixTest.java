@@ -420,4 +420,38 @@ class MatrixTest {
         Point p = new Point(0f,1f,0f);
         assertEquals(new Point(0f, (float) (Math.sqrt(2)/2), (float) -(Math.sqrt(2)/2)),inversedHalfQuarter.multiply(p));
     }
+
+    @Test
+    void multiplyYRotatedMatrix() {
+        Matrix halfQuarter = Matrix.yRotation((float) Math.toRadians(45));
+        Matrix fullQuarter = Matrix.yRotation((float) Math.toRadians(90));
+        Point p = new Point(0f,0f,1f);
+        assertEquals(new Point((float) (Math.sqrt(2)/2), 0f, (float) (Math.sqrt(2)/2)),halfQuarter.multiply(p));
+        assertEquals(new Point(1f, 0f, 0f),fullQuarter.multiply(p));
+    }
+    @Test
+    void multiplyZRotatedMatrix() {
+        Matrix halfQuarter = Matrix.zRotation((float) Math.toRadians(45));
+        Matrix fullQuarter = Matrix.zRotation((float) Math.toRadians(90));
+        Point p = new Point(0f,1f,0f);
+        assertEquals(new Point((float) -(Math.sqrt(2)/2), (float) (Math.sqrt(2)/2),0f),halfQuarter.multiply(p));
+        assertEquals(new Point(-1f, 0f, 0f),fullQuarter.multiply(p));
+    }
+    @Test
+    void multiplyShearingMatrix() {
+        Matrix transform = Matrix.shearing(1,0,0,0,0,0);
+        Point p = new Point(2f,3f,4f);
+        assertEquals(new Point(5f,3f,4f),transform.multiply(p));
+        transform = Matrix.shearing(0,1,0,0,0,0);
+        assertEquals(new Point(6f,3f,4f),transform.multiply(p));
+        transform = Matrix.shearing(0,0,1,0,0,0);
+        assertEquals(new Point(2f,5f,4f),transform.multiply(p));
+        transform = Matrix.shearing(0,0,0,1,0,0);
+        assertEquals(new Point(2f,7f,4f),transform.multiply(p));
+        transform = Matrix.shearing(0,0,0,0,1,0);
+        assertEquals(new Point(2f,3f,6f),transform.multiply(p));
+        transform = Matrix.shearing(0,0,0,0,0,1);
+        assertEquals(new Point(2f,3f,7f),transform.multiply(p));
+    }
+
 }

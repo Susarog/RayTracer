@@ -212,6 +212,39 @@ public class Matrix {
         return new Matrix(transform);
     }
 
+    public static Matrix yRotation(float rad) {
+        float x = (float) Math.cos(rad);
+        float y = (float) Math.sin(rad);
+
+        float[] row1 = new float[]{x,0f,y,0f};
+        float[] row2 = new float[]{0f,1f,0f,0f};
+        float[] row3 = new float[]{-y,0f,x,0f};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] transform = new float[][]{row1,row2,row3,row4};
+        return new Matrix(transform);
+    }
+    public static Matrix zRotation(float rad) {
+        float x = (float) Math.cos(rad);
+        float y = (float) Math.sin(rad);
+
+        float[] row1 = new float[]{x,-y,0f,0f};
+        float[] row2 = new float[]{y,x,0f,0f};
+        float[] row3 = new float[]{0,0f,1f,0f};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] transform = new float[][]{row1,row2,row3,row4};
+        return new Matrix(transform);
+    }
+
+    public static Matrix shearing(float xPropY,float xPropZ,float yPropX,float yPropZ,float zPropX,float zPropY) {
+        float[] row1 = new float[]{1f,xPropY,xPropZ,0f};
+        float[] row2 = new float[]{yPropX,1f,yPropZ,0f};
+        float[] row3 = new float[]{zPropX,zPropY,1f,0f};
+        float[] row4 = new float[]{0f,0f,0f,1f};
+        float[][] transform = new float[][]{row1,row2,row3,row4};
+        return new Matrix(transform);
+    }
+
+
     public int getRowLength() {
         return row;
     }
