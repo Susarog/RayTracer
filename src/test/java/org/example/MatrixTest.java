@@ -453,5 +453,26 @@ class MatrixTest {
         transform = Matrix.shearing(0,0,0,0,0,1);
         assertEquals(new Point(2f,3f,7f),transform.multiply(p));
     }
+    @Test
+    void individualTransformationMethods() {
+        Point p = new Point(1f,0f,1f);
+        Matrix a = Matrix.xRotation((float) Math.toRadians(90));
+        Matrix b = Matrix.scaling(5f,5f,5f);
+        Matrix c = Matrix.translation(10f,5f,7f);
+        Point p2 = a.multiply(p);
+        Point p3 = b.multiply(p2);
+        Point p4 = c.multiply(p3);
+        assertEquals(new Point(15f,0f,7f),p4);
+    }
+    @Test
+    void chainTransformationMethods() {
+        Point p = new Point(1f,0f,1f);
+        Matrix a = Matrix.xRotation((float) Math.toRadians(90));
+        Matrix b = Matrix.scaling(5f,5f,5f);
+        Matrix c = Matrix.translation(10f,5f,7f);
+        Matrix t = c.multiply(b.multiply(a));
+        Point p2 = t.multiply(p);
+        assertEquals(new Point(15f,0f,7f),p2);
+    }
 
 }

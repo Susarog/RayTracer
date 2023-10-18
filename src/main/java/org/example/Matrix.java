@@ -36,6 +36,17 @@ public class Matrix {
         this.matrix = matrix;
     }
 
+    public Matrix() {
+        row = 4;
+        column = 4;
+        matrix = new float[row][column];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrix[i][j] = (float) ((i == j) ? 1.0 : 0.0);
+            }
+        }
+    }
+
     public float get(int row,int col) {
         return matrix[row][col];
     }
@@ -243,7 +254,6 @@ public class Matrix {
         float[][] transform = new float[][]{row1,row2,row3,row4};
         return new Matrix(transform);
     }
-
 
     public int getRowLength() {
         return row;
