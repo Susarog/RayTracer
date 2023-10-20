@@ -46,8 +46,8 @@ public class Point {
         return new Point(this.coordinate.add(b.getTuple()));
     }
 
-    public Point subtract(Point b) {
-        return new Point(this.coordinate.subtract(b.coordinate));
+    public Vector subtract(Point b) {
+        return new Vector(this.coordinate.subtract(b.coordinate));
     }
     public Point multiply(float scalar) {
         return new Point(this.coordinate.multiply(scalar));

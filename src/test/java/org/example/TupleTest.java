@@ -36,7 +36,7 @@ public class TupleTest {
     void subtractTwoPoints() {
         Point a = new Point(3.0f,2.0f,1.0f);
         Point b = new Point(5.0f,6.0f,7.0f);
-        Assertions.assertEquals(new Point(-2.0f,-4.0f,-6.0f), a.subtract(b));
+        Assertions.assertEquals(new Vector(-2.0f,-4.0f,-6.0f), a.subtract(b));
     }
     @Test
     void subtractTwoVectors() {
