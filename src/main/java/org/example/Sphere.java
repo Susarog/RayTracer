@@ -1,16 +1,27 @@
 package org.example;
 
 public class Sphere {
-// Instance variables
-    private float radius;
     private Point origin;
+    private Matrix transform;
 
-    // Constructor
     public Sphere() {
         origin = new Point(0,0,0);
+        transform = new Matrix();
+    }
+    public Sphere(Matrix transform) {
+        origin = new Point(0,0,0);
+        this.transform = transform;
     }
 
     public Point getOrigin() {
         return origin;
+    }
+
+    public Matrix getTransform() {
+        return transform;
+    }
+
+    public void setTransform(Matrix transform) {
+        this.transform = transform;
     }
 }
