@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.Dictionary;
 
 public class Ray {
     public Point position(float time) {
@@ -38,7 +37,6 @@ public class Ray {
 
     private Point origin;
     private Vector direction;
-
 
     public Point getOrigin() {
         return origin;
