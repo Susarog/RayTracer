@@ -17,12 +17,12 @@ public class Canvas {
         }
     }
 
-    public void writePixel(int row, int column, Color color) {
-        canvas.get(column).set(row,color);
+    public void writePixel(int column, int row, Color color) {
+        canvas.get(row).set(column,color);
     }
 
-    public Color getPixel(int row, int column) {
-        return canvas.get(column).get(row);
+    public Color getPixel(int column, int row) {
+        return canvas.get(row).get(column);
     }
 
     public int getWidth() {
