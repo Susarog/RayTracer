@@ -60,5 +60,11 @@ class SphereTest {
         Vector surfaceNormal = sphere.normalAt(new Point(0,value,-(value)));
         assertEquals(new Vector(0,0.97014f,-0.24254f), surfaceNormal);
     }
+    @Test
+    void getSphereMaterials() {
+        Sphere sphere = new Sphere();
+        Material material = new Material();
+        assertEquals(material, sphere.getMaterial());
+    }
 
 }

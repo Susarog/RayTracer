@@ -34,9 +34,12 @@ public class Sphere {
     private Point origin;
     private Matrix transform;
 
+    private Material material;
+
     public Sphere() {
         origin = new Point(0,0,0);
         transform = new Matrix();
+        material = new Material();
     }
     public Sphere(Matrix transform) {
         origin = new Point(0,0,0);
@@ -60,5 +63,9 @@ public class Sphere {
 
     public void setTransform(Matrix transform) {
         this.transform = transform;
+    }
+
+    public Material getMaterial() {
+        return material;
     }
 }
