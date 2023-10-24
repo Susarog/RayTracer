@@ -78,5 +78,9 @@ public class Vector {
     public Vector crossProduct(Vector b) {
         return new Vector((this.getY()) *(b.getZ()) - (this.getZ()) * (b.getY()), (this.getZ()) * (b.getX()) - (this.getX()) * (b.getZ()), (this.getX()) * (b.getY()) - (this.getY()) * (b.getX()));
     }
+
+    public Vector reflect(Vector normal){
+        return this.subtract(normal.multiply(2*this.dotProduct(normal)));
+    }
     private Tuple tuple;
 }

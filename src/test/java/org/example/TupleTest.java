@@ -156,5 +156,18 @@ public class TupleTest {
         Color b = new Color(0.9f,1.0f,0.1f);
         Assertions.assertEquals(new Color(0.9f,0.2f,0.04f), a.hadamardProduct(b));
     }
-
+    @Test
+    void reflectVectorApproaching45Deg(){
+        Vector v = new Vector(1,-1,0);
+        Vector n = new Vector(0,1,0);
+        Vector reflectedVector = v.reflect(n);
+        Assertions.assertEquals(new Vector(1f,1f,0f), reflectedVector);
+    }
+    @Test
+    void reflectVectorApproachingSlantedSurface(){
+        Vector v = new Vector(0,-1,0);
+        Vector n = new Vector((float) Math.sqrt(2)/2,(float) Math.sqrt(2)/2,0);
+        Vector reflectedVector = v.reflect(n);
+        Assertions.assertEquals(new Vector(1f,0f,0f), reflectedVector);
+    }
 }
