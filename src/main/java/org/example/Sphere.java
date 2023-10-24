@@ -43,6 +43,13 @@ public class Sphere {
         this.transform = transform;
     }
 
+    public Vector normalAt(Point point) {
+        Point objectPoint = transform.inverse().multiply(point);
+        Vector objectNormal = objectPoint.subtract(origin);
+        Vector worldNormal = transform.inverse().transpose().multiply(objectNormal);
+        return worldNormal.normalize();
+    }
+
     public Point getOrigin() {
         return origin;
     }
