@@ -17,6 +17,8 @@ public class Tuple {
         if (!(obj instanceof Tuple other)) {
             return false;
         }
+        Math.abs(this.value2 - other.value2);
+        boolean b = Math.abs(this.value2 - other.value2) < EPSILON;
         return (Math.abs(this.value2 - other.value2) < EPSILON) && (Math.abs(this.value - other.value) < EPSILON) && (Math.abs(this.value1 - other.value1) < EPSILON);
     }
 
@@ -56,5 +58,5 @@ public class Tuple {
     private final float value1;
     private final float value2;
     private final float value3;
-    private final static double EPSILON = 0.00001;
+    private final static double EPSILON = 0.0001;
 }

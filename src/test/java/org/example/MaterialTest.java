@@ -42,17 +42,18 @@ class MaterialTest {
         Vector normalVec = new Vector(0,0,-1);
         Light light = new Light(new Point(0,10,-10), new Color(1,1,1));
         Color result = light.lighting(material, position, eyeVec, normalVec);
-        assertEquals(new Color((float)Math.sqrt(2)/2,(float)Math.sqrt(2)/2,(float)Math.sqrt(2)/2), result);
+        assertEquals(new Color(0.7364f,0.7364f,0.7364f), result);
     }
     @Test
     void lightingWithEyeOnReflectionVector() {
         Material material = new Material();
         Point position = new Point(0,0,0);
-        Vector eyeVec = new Vector(0,(float)Math.sqrt(2)/2,-(float)Math.sqrt(2)/2);
+        Vector eyeVec = new Vector(0,(float)-(Math.sqrt(2)/2),(float)-(Math.sqrt(2)/2));
         Vector normalVec = new Vector(0,0,-1);
         Light light = new Light(new Point(0,10,-10), new Color(1,1,1));
         Color result = light.lighting(material, position, eyeVec, normalVec);
-        assertEquals(new Color(1.6364f,1.6364f,1.6364f), result);
+        float value = (float) (0.1 + 0.9 * (Math.sqrt(2)/2) + 0.9);
+        assertEquals(new Color(value,value,value), result);
     }
     @Test
     void lightingOnOppositeSide() {

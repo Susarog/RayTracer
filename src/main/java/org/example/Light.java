@@ -13,10 +13,10 @@ public class Light {
     public Color lighting(Material material, Point position, Vector eyeVec, Vector normalVec) {
         // combine the surface color with the light's color
         Color effectiveColor = material.getColor().hadamardProduct(intensity);
-        Vector lightVec = this.position.subtract(position);
+        Vector lightVec = this.position.subtract(position).normalize();
         Color ambient = effectiveColor.multiply(material.getAmbient());
-        float diffuse = 0;
-        float specular = 0;
+        Color diffuse = new Color(0,0,0);
+        Color specular = new Color(0,0,0);
         float lightDotNormal = lightVec.dotProduct(normalVec);
         if (lightDotNormal >= 0 ) {
             diffuse = effectiveColor.multiply(material.getDiffuse()).multiply(lightDotNormal);
@@ -24,12 +24,11 @@ public class Light {
             float reflectDotEye = reflectVec.dotProduct(eyeVec);
 
             if (reflectDotEye > 0) {
-                float factor = Math.pow(reflectDotEye, material.getShininess());
-                specular = 0;
+                float factor = (float) Math.pow(reflectDotEye,material.getShininess());
+                specular = intensity.multiply(material.getSpecular()).multiply(factor);
             }
         }
-        float finalShading = ambient + diffuse + specular;
-        return new Color(finalShading, finalShading, finalShading) ;
+        return ambient.add(diffuse).add(specular);
     }
     public Point getPosition() {
         return position;
