@@ -11,9 +11,12 @@ public class Sphere {
         float pixelSize = wallSize / canvasPixels;
         float half = wallSize/2;
         Sphere s = new Sphere();
+        s.getMaterial().setColor(new Color(1,0.2f,1));
         Point rayOrigin = new Point(0f,0f,-5f);
+        Point lightPosition = new Point(-10,10,-10);
+        Color lightColor = new Color(1,1,1);
+        Light light = new Light(lightPosition, lightColor);
         Canvas canvas = new Canvas(canvasPixels, canvasPixels);
-        Color red = new Color(1f,0f,0f);
         for (int y = 0; y < canvasPixels; y++) {
             float yCoords = (half - (pixelSize * y));
             for (int x = 0; x < canvasPixels; x++) {
@@ -21,9 +24,15 @@ public class Sphere {
                 Point currentPosition = new Point(xCoords,yCoords,zWall);
                 Ray r = new Ray(rayOrigin,currentPosition.subtract(rayOrigin).normalize());
                 Intersection[] xs = r.intersect(s);
-                if(Intersection.hit(xs) != null) {
-                    canvas.writePixel(x,y,red);
+                Intersection hitIntersection = Intersection.hit(xs);
+                if(hitIntersection != null) {
+                    Point pointAtIntersection = r.position(hitIntersection.getTime());
+                    Vector eye = r.getDirection().normalize().negate();
+                    Vector normal = hitIntersection.getObject().normalAt(pointAtIntersection);
+                    Color color = light.lighting(hitIntersection.getObject().getMaterial(), pointAtIntersection, eye, normal);
+                    canvas.writePixel(x,y,color);
                 }
+
             }
         }
 
